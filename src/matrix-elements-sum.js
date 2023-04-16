@@ -1,24 +1,23 @@
-const { NotImplementedError } = require('../extensions/index.js');
+function getMatrixElementsSum(matrix) {
+  const zeroIndices = new Set();
+  let sum = 0;
 
-/**
- * Given matrix, a rectangular matrix of integers,
- * just add up all the values that don't appear below a "0".
- *
- * @param {Array<Array>} matrix
- * @return {Number}
- *
- * @example
- * matrix = [
- *  [0, 1, 1, 2],
- *  [0, 5, 0, 0],
- *  [2, 0, 3, 3]
- * ]
- *
- * The result should be 9
- */
-function getMatrixElementsSum(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+  // Iterate through each row and column of the matrix
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      // If the current element is zero, mark its index as zero
+      if (matrix[i][j] === 0) {
+        zeroIndices.add(j);
+      }
+      // If the current element is not zero and none of the elements
+      // above it in the same column are zero, add it to the sum
+      else if (!zeroIndices.has(j)) {
+        sum += matrix[i][j];
+      }
+    }
+  }
+
+  return sum;
 }
 
 module.exports = {
